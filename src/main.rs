@@ -22,7 +22,7 @@ struct Options {
     volume: u16,
     #[clap(long, default_value = "2", possible_values = &["1", "2"])]
     channels: u8,
-    #[clap(long, default_value = "48000")]
+    #[clap(long, default_value = "48000", possible_values = &["8000", "12000", "16000", "24000", "48000"])]
     frame_rate: u32,
     #[clap(long, default_value = "960", possible_values = &["960", "1920", "2880"])]
     frame_size: u32,
