@@ -1,11 +1,13 @@
 pub mod structs;
 pub mod enums;
 pub mod validators;
+pub mod ffmpeg;
 
 use std::process::exit;
 
 use clap::{Clap, ValueHint};
 use enums::OpusApplication;
+use structs::Metadata;
 use validators::*;
 
 #[derive(Clap, Debug)]
@@ -47,4 +49,6 @@ fn main() {
         eprintln!("{}", e);
         exit(1);
     }
+
+    let metadata = Metadata::new(opts.in_file.as_str(), opts.bitrate * 1000, opts.application, opts.frame_rate, opts.frame_size, opts.channels);
 }

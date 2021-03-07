@@ -23,6 +23,16 @@ impl FromStr for OpusApplication {
     }
 }
 
+impl ToString for OpusApplication {
+    fn to_string(&self) -> String {
+        match self {
+            Self::Audio => String::from("audio"),
+            Self::Voip => String::from("voip"),
+            Self::LowDelay => String::from("lowdelay"),
+        }
+    }
+}
+
 impl From<OpusApplication> for opus::Application {
     fn from(x: OpusApplication) -> Self {
         match x {
