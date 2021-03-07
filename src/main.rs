@@ -26,7 +26,7 @@ struct Options {
     frame_rate: u32,
     #[clap(long, default_value = "960", possible_values = &["960", "1920", "2880"])]
     frame_size: u32,
-    #[clap(long, default_value = "64", validator = bitrate_validator)]
+    #[clap(long, default_value = "64000", validator = bitrate_validator)]
     bitrate: u32,
     #[clap(long, default_value = "audio", possible_values = &["audio", "voip", "lowdelay"])]
     application: OpusApplication,
@@ -50,5 +50,5 @@ fn main() {
         exit(1);
     }
 
-    let metadata = Metadata::new(opts.in_file.as_str(), opts.bitrate * 1000, opts.application, opts.frame_rate, opts.frame_size, opts.channels);
+    let metadata = Metadata::new(opts.in_file.as_str(), opts.bitrate, opts.application, opts.frame_rate, opts.frame_size, opts.channels);
 }
