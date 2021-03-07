@@ -26,7 +26,7 @@ struct Options {
     frame_rate: u32,
     #[clap(long, default_value = "960", possible_values = &["960", "1920", "2880"])]
     frame_size: u32,
-    #[clap(long, default_value = "64")]
+    #[clap(long, default_value = "64", validator = bitrate_validator)]
     bitrate: u32,
     #[clap(long, default_value = "audio", possible_values = &["audio", "voip", "lowdelay"])]
     application: OpusApplication,
@@ -38,7 +38,7 @@ struct Options {
 
 fn main() {
     let opts: Options = Options::parse();
-    
+
     // check for FFmpeg and FFprobe
     if let Err(e) = check_for_executable("ffmpeg", "FFmpeg") {
         eprintln!("{}", e);

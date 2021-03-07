@@ -34,3 +34,10 @@ pub fn check_for_executable(exec_name: &str, friendly_name: &str) -> Result<(), 
         Err(e) => Err(format!("Could not spawn process: {}", e))
     }
 }
+
+pub fn bitrate_validator(bitrate: &str) -> Result<(), String> {
+    match bitrate.parse::<u32>() {
+        Ok(bitrate) if bitrate >= 500 && bitrate <= 512000 => Ok(()),
+        _ => Err(format!("Bitrate must be a valid integer between 500 and 512000, {} given", bitrate))
+    }
+}
